@@ -39,7 +39,7 @@ void retira(TEI *resp){
 
 void insere_no_final_da_lista(TEI *resp, int p_user, int id, char *narq) {
     // printf("insere_no_final_da_lista\n");
-    if(resp->tam > resp->ult_pos_ocup) {
+    if(resp->tam > (resp->ult_pos_ocup -1)) {
         resp->ult_pos_ocup += 1;
         resp->vet[resp->ult_pos_ocup] = (TP *) malloc(sizeof(TP *));
         resp->vet[resp->ult_pos_ocup]->p_user = p_user;
@@ -48,33 +48,48 @@ void insere_no_final_da_lista(TEI *resp, int p_user, int id, char *narq) {
     }
 }
 
-void insere_no_meio_da_lista(TEI *resp, int p_user, int id, char *narq, int posicao_a_inserir) {
-    // printf("insere_no_meio_da_lista\n");
+void insere_posicao_da_lista(TEI *resp, int p_user, int id, char *narq, int posicao_a_inserir) {
+    // printf("insere_posicao_da_lista = %d \n", posicao_a_inserir);
     // Nada a fazer a lista ja esta cheia
     if((posicao_a_inserir < (resp->tam)) && ( resp->ult_pos_ocup < (resp->tam - 1)) ){
-        // shiftar pra direita
-        for(int i = (resp->ult_pos_ocup + 1); i >= posicao_a_inserir; i--){
+        // printf("shiftar pra direita\n");
+        for(int i = resp->ult_pos_ocup + 1; i > posicao_a_inserir; i--){
+            //printf("i = %d \n", i);
+            //printf("i - 1 = %d \n", i - 1);
             resp->vet[i] = (TP *) malloc(sizeof(TP *));
             resp->vet[i]->p_user = resp->vet[i-1]->p_user;
             resp->vet[i]->id     = resp->vet[i-1]->id;
             memcpy(resp->vet[i]->narq, resp->vet[i-1]->narq, strlen(resp->vet[i-1]->narq));
         }
-        resp->ult_pos_ocup += 1;
+        // printf("Mapear informacao no lugar certo\n");
         resp->vet[posicao_a_inserir]->p_user = p_user;
         resp->vet[posicao_a_inserir]->id = id;
         memset(resp->vet[posicao_a_inserir]->narq, '\0', strlen(resp->vet[posicao_a_inserir]->narq));
         memcpy(resp->vet[posicao_a_inserir]->narq, narq, strlen(narq));
+        resp->ult_pos_ocup += 1;
+        // printf("resp->ult_pos_ocup = %d \n", resp->ult_pos_ocup);
     }
 }
 
 int find_by_user(TEI *resp, int p_user) {
+    // printf("find_by_user = %d\n", p_user);
+    if(p_user > resp->vet[0]->p_user) {return 0;}
+
     int posicao_a_inserir = 0;
     for(int indice = 0; indice <= resp->ult_pos_ocup; indice++){
-        if(resp->vet[indice]->p_user == p_user) {
-            posicao_a_inserir = indice + 1; 
+        if(p_user > resp->vet[indice]->p_user ) {
+            break; 
+        } else {
+          posicao_a_inserir = indice + 1;
         }
     }
-    // printf("find_by_user = %d\n", posicao_a_inserir);
+
+    // for(int indice = 0; indice <= resp->ult_pos_ocup; indice++){
+    //     if(resp->vet[indice]->p_user == p_user) {
+    //         posicao_a_inserir = indice + 1; 
+    //     }
+    // }
+    // printf("posicao_a_inserir = %d\n", posicao_a_inserir);
     return posicao_a_inserir;
 }
 
@@ -89,10 +104,11 @@ void insere(TEI *resp, int p_user, int id, char *narq){
         insere_no_final_da_lista(resp, p_user, id, narq);
     } else {
         int posicao_a_inserir = find_by_user(resp, p_user);
-        if(posicao_a_inserir == 0 || posicao_a_inserir > resp->ult_pos_ocup) {
+        // printf("resp->ult_pos_ocup = %d\n", resp->ult_pos_ocup);
+        if(posicao_a_inserir > resp->ult_pos_ocup) {
             insere_no_final_da_lista(resp, p_user, id, narq);
         } else {
-            insere_no_meio_da_lista(resp, p_user, id, narq, posicao_a_inserir);
+            insere_posicao_da_lista(resp, p_user, id, narq, posicao_a_inserir);
         }
     }
 }
