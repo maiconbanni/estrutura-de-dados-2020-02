@@ -22,7 +22,6 @@ int main(void){
 
 int* axd(int *vet, int n, int x, int *tam) {
     int qtd_1 = 0;
-    int qtd_n = 0;
     int index = 0;
     // Obtendo quantos 1 eu tenho
     for (int cont = 0; cont < n; cont++) {

@@ -24,9 +24,7 @@ int main(void){
       scanf(" %10[^\n]", vet[i]->data_nasc);
     }
     ordena(vet, n);
-    for(i = 0; i < n; i++) {
-        printf("%d\n", vet[i]->mat);
-    }
+    for(i = 0; i < n; i++) printf("%d\n", vet[i]->mat);
     for(i = 0; i < n; i++) free(vet[i]);
   }
   return 0; 
