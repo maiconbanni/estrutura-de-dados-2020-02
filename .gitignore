@@ -1,5 +1,8 @@
 */questao_[0-9][0-9]
+*/questao_[0-9][0-9].[0-9]
 */exemplos
+*/exemplo
 */tarefa_[0-9][0-9]
 */helloWorld
 */teste*
+*/q[0-9]
