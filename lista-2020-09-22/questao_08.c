@@ -31,6 +31,11 @@ int main (void)
 
     resultado = cic(string1, string2);
     printf("resultado = %d\n", resultado);
+
+    free(string1);
+    free(string2);
+    
+    return 0;
 }
 
 int cic (char *str1, char *str2) {
