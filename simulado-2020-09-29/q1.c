@@ -27,7 +27,7 @@ int main(void){
     for(i = 0; i < n; i++) printf("%d\n", vet[i]->mat);
     for(i = 0; i < n; i++) free(vet[i]);
   }
-  return 0; 
+  return 0;
 }
 
 void ordena(TC **vet, int n) {
