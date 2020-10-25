@@ -1,7 +1,5 @@
-
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 /*
     2.  Suponha que criamos uma estrutura para armazenar Datas:
     struct Data{
