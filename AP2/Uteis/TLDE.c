@@ -109,3 +109,12 @@ void TLDE_ordena(TLDE *l) {
     atual = atual->prox;
   }
 }
+
+TLDE* TLDE_inverte(TLDE *l){
+  TLDE* lista_invertida = NULL;
+  while (l) {
+    lista_invertida = TLDE_insere_inicio(lista_invertida, l->info);
+    l = l->prox;
+  }
+  return lista_invertida;
+}

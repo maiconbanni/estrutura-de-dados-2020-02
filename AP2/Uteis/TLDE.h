@@ -13,4 +13,5 @@ void TLDE_imprime(TLDE *l);
 void TLDE_libera(TLDE *l);
 TLDE* TLDE_retira(TLDE *l, int elem);
 TLDE* TLDE_busca(TLDE *l, int elem);
+TLDE* TLDE_inverte(TLDE *l);
 void TLDE_ordena(TLDE *l);

@@ -15,7 +15,7 @@ int main(void){
   printf("\n");
   
   scanf("%d", &x);
-  TLDE_ordena(l);
+  l = TLDE_inverte(l);
   TLDE_imprime(l);
   printf("\n");
 
