@@ -3,6 +3,7 @@
 int main(void){
   TAB* arvbin = NULL;
   TAB* newbin = NULL;
+  TAB* pai, *no_encontrado;
 
   arvbin = TAB_insere(arvbin,10);
   arvbin = TAB_insere(arvbin,20);
@@ -22,6 +23,19 @@ int main(void){
   newbin = TAB_insere(newbin,3);
   newbin = TAB_insere(newbin,6);
   newbin = TAB_insere(newbin,1);
+
+  printf("Imprimindo predecessor! \n");
+  no_encontrado = predecessor(TAB_busca(arvbin, 15));
+  TAB_imprime(no_encontrado);
+  printf("\n");
+
+  printf("Imprimindo no_encontrado! \n");
+  no_encontrado = buscaSetPai(newbin, 6, &pai);
+  TAB_imprime(no_encontrado);
+  printf("\n");
+  printf("Imprimindo pai de 6! \n");
+  TAB_imprime(pai);
+  printf("\n");
 
   printf("Imprimindo Folhas! \n");
   imprime_folhas(arvbin);

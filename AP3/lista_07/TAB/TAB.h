@@ -39,3 +39,7 @@ int zigzag (TAB *a);
 void imprime_folhas(TAB* a);
 int soma_nos (TAB* p);
 void imprime_nivel (TAB* a, int nivel, int valor);
+TAB *v2abb(int *v, int n);
+int existInTree(TAB* t, int info);
+TAB* inserir_invertido(TAB* t, int x);
+TAB* buscaSetPai (TAB* raiz, int info, TAB **pai);

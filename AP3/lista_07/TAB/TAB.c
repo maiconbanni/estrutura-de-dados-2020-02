@@ -82,6 +82,7 @@ void TAB_imprime_preorder(TAB* p) {
 // Simetrica
 void TAB_imprime_inorder(TAB* p) {
   if (p != NULL) {
+    int i = 0;
     TAB_imprime_inorder(p->esq);
     printf("%d ",p->info);
     TAB_imprime_inorder(p->dir);
@@ -277,13 +278,42 @@ int soma_nos (TAB* p){
 }
 
 void imprime_nivel (TAB* a, int nivel, int valor){
-  if (!a)
-    return;
+  if (!a) return;
   imprime_nivel(a->esq, nivel+1, valor);
-  if(nivel == valor){
-    printf("%d\t",a->info);
-  }
+  if(nivel == valor) printf("%d\t",a->info);
   imprime_nivel(a->dir, nivel+1, valor);
+}
+
+TAB *v2abb(int *v, int n){
+  if(n <= 0) return NULL;
+  return TAB_cria(v[n/2], v2abb(v, n/2), v2abb (&v[n/2 + 1], n - n/2 - 1));
+}
+
+/* Função que verifica se um elemento pertence ou não à árvore */
+int existInTree(TAB* t, int info) {
+  if(!t) return 0;
+  return t->info == info || existInTree(t->esq, info) || existInTree(t->dir, info);
+}
+
+TAB* inserir_invertido(TAB* t, int x) {
+  if (!t) return TAB_cria(x, NULL, NULL);
+  if (t->info < x) t->esq = TAB_insere(t->esq, x);
+  if (t->info > x) t->dir = TAB_insere(t->dir, x);
+  return t;
+}
+
+TAB* buscaSetPai (TAB* raiz, int info, TAB **pai) {
+	TAB *no = NULL;
+	if(raiz == NULL) *pai = NULL;
+	else {
+		if( raiz->info == info) no = raiz;
+		else {
+			*pai = raiz;
+			if( raiz->info > info) no = buscaSetPai(raiz->esq, info, pai);
+			else no = buscaSetPai(raiz->dir, info, pai);
+		}
+	}
+	return no;
 }
 
 // ######################################################################################################################
